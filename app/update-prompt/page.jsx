@@ -1,46 +1,54 @@
 "use client"
 
 import Form from "@components/Form"
-import { useState ,useEffect} from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSession } from "next-auth/react"
-import { useRouter ,useSearchParams} from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
-const page = () => {
-    const router=useRouter()
-    const searchParams=useSearchParams()
-    const promptId=searchParams.get("id")
-    const [submitting,setSubmitting]=useState(false)
-    const [post,setPost]=useState({
-        prompt:"",tag:""
+const UpdatePromptContent = () => {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+    const promptId = searchParams.get("id")
+    const [submitting, setSubmitting] = useState(false)
+    const [post, setPost] = useState({
+        prompt: "", tag: ""
     })
-    const updatePrompt=async(e)=>{
+    const updatePrompt = async (e) => {
         e.preventDefault()
         setSubmitting(true)
-        if(!promptId) return alert("prompt ID not found")
+        if (!promptId) return alert("prompt ID not found")
         try {
-            const res=await fetch(`/api/prompt/${promptId}`,{
-                method:"PATCH",body:JSON.stringify(post)
+            const res = await fetch(`/api/prompt/${promptId}`, {
+                method: "PATCH", body: JSON.stringify(post)
             })
-            if(res.ok){
+            if (res.ok) {
                 router.push("/")
             }
         } catch (error) {
             console.log(error)
-        } finally{
+        } finally {
             setSubmitting(false)
         }
     }
-    useEffect(()=>{
-        const fetchData=async()=>{
-            const res=await fetch(`/api/prompt/${promptId}`)
-            const data=await res.json()
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(`/api/prompt/${promptId}`)
+            const data = await res.json()
             setPost(data)
         }
-        if(promptId) fetchData()
-    },[])
-  return (
-    <Form type="Edit" post={post} setPost={setPost} submitting={submitting} handleSubmit={updatePrompt}/>
-  )
+        if (promptId) fetchData()
+    }, [promptId])
+    return (
+        <Form type="Edit" post={post} setPost={setPost} submitting={submitting} handleSubmit={updatePrompt} />
+    )
 }
 
-export default page
+const UpdatePromptPage = () => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <UpdatePromptContent />
+        </Suspense>
+    )
+}
+
+export default UpdatePromptPage

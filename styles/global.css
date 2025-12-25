@@ -78,11 +78,11 @@
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-black bg-black py-2 px-6 text-white transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg text-center text-sm font-inter flex items-center justify-center font-medium;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-black bg-transparent py-2 px-6 text-black transition-all duration-300 hover:bg-black hover:text-white hover:shadow-lg text-center text-sm font-inter flex items-center justify-center font-medium;
 }
 
 .head_text {
@@ -90,9 +90,8 @@
 }
 
 .orange_gradient {
-  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500  bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
-
 
 .green_gradient {
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
@@ -102,20 +101,24 @@
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
 }
 
+.purple_gradient {
+  @apply bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-text text-transparent;
+}
+
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-full border border-gray-200 bg-white py-3 font-satoshi pl-6 pr-12 text-sm shadow-lg font-medium focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-200 transition-all duration-300;
 }
 
 .copy_btn {
-  @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
+  @apply w-8 h-8 rounded-full bg-white/80 shadow-md backdrop-blur flex justify-center items-center cursor-pointer hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100;
 }
 
 .glassmorphism {
-  @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
+  @apply rounded-2xl border border-gray-200 bg-white/60 shadow-xl backdrop-blur-lg p-6;
 }
 
 .prompt_layout {
@@ -129,11 +132,11 @@
 
 /* Form Component */
 .form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-full flex rounded-xl h-[200px] mt-2 p-4 text-sm text-gray-700 outline-none border border-gray-200 bg-white/80 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-300 resize-none;
 }
 
 .form_input {
-  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-full flex rounded-xl mt-2 p-4 text-sm text-gray-700 outline-none border border-gray-200 bg-white/80 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-all duration-300;
 }
 
 /* Nav Component */
@@ -142,16 +145,16 @@
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-2xl bg-white shadow-xl min-w-[210px] flex flex-col gap-3 justify-end items-end border border-gray-100;
 }
 
 .dropdown_link {
-  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+  @apply text-sm font-inter text-gray-700 hover:text-orange-500 font-medium transition-colors duration-200;
 }
 
 /* PromptCard Component */
 .prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+  @apply flex-1 break-inside-avoid rounded-2xl border border-gray-200 bg-white/70 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit shadow-lg hover:shadow-xl hover:border-gray-300 transition-all duration-300;
 }
 
 .flex-center {
@@ -168,4 +171,34 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+/* New Animation Classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff5722, #ff9800);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #e64a19, #f57c00);
 }

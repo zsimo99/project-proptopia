@@ -5,7 +5,7 @@ import Prompt from "@models/prompt";
 export const GET = async (req, { params }) => {
   try {
     await connectToDB();
-    const { id } = params;
+    const { id } = await params;
     const post = await Prompt.findById(id).populate("creator");
     if (!post) return new Response("prompt not found", { status: 404 });
     return new Response(JSON.stringify(post), { status: 200 });
@@ -19,7 +19,7 @@ export const PATCH = async (req, { params }) => {
   const { prompt, tag } = await req.json();
   try {
     await connectToDB();
-    const { id } = params;
+    const { id } = await params;
     const post = await Prompt.findById(id);
     if (!post) return new Response("prompt not found", { status: 404 });
     post.prompt = prompt;
@@ -35,7 +35,8 @@ export const PATCH = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
   try {
     await connectToDB();
-    await Prompt.findByIdAndDelete(params.id);
+    const { id } = await params;
+    await Prompt.findByIdAndDelete(id);
     return new Response("prompt deleted successfully", { status: 200 });
   } catch (error) {
     return new Response("failed to delete this prompt ", { status: 500 });
